@@ -41,3 +41,12 @@ When no teacher exists with the email id provided
 ![alt text](/misc/ret2.jpg "Title")
 
 
+### 3. If given two teachers' emails, I should be able to retrieve the list of common students they have.
+
+Success flow
+
+![alt text](/misc/comm1.jpg "Title")
+
+When insufficient number of teachers are specified
+
+![alt text](/misc/comm2.jpg "Title")
