@@ -30,4 +30,14 @@ When teacher is already registered
 
 ![alt text](/misc/reg2.jpg "Title")
 
+### 2. As a teacher, I should be able to retrieve the list of students under a specified email.
+
+Success flow
+
+![alt text](/misc/ret1.jpg "Title")
+
+When no teacher exists with the email id provided
+
+![alt text](/misc/ret2.jpg "Title")
+
 
