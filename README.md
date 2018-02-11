@@ -50,3 +50,11 @@ Success flow
 When insufficient number of teachers are specified
 
 ![alt text](/misc/comm2.jpg "Title")
+
+### 4. When a student is suspended, he will not be able to receive any teacher's notifications anymore.
+
+![alt text](/misc/sus1.jpg "Title")
+
+### 5. As a teacher, I should be able to retrieve all student emails that can receive notifications from a teacher's email.
+
+![alt text](/misc/not1.jpg "Title")

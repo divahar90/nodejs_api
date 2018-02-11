@@ -25,18 +25,21 @@ router.post('/', function(req, res) {
     mongoClient.connect(url, function (err, db) {
         db.collection("school").find({
             $and: [{"teacher": req.body.teacher}, {"students.suspend": {$all: [false]}}]}).toArray(function (err, result) {
-
-                console.log(result);
-
                 var studs = [];
                 var uniqueStuds = [];
-                for(var idx=0;idx<result[0].students.length;idx++){
-                    studs.push(result[0].students[idx].email);
-                }
 
-            uniqueStuds = studs.filter(function(elem, pos) {
-                return studs.indexOf(elem) == pos;
-            })
+                if(null!=result
+                            && undefined!=result && result.length>0) {
+                    for (var idx = 0; idx < result[0].students.length; idx++) {
+                        if(!result[0].students[idx].suspend) {
+                            studs.push(result[0].students[idx].email);
+                        }
+                    }
+
+                    uniqueStuds = studs.filter(function (elem, pos) {
+                        return studs.indexOf(elem) == pos;
+                    })
+                }
 
             console.log(uniqueStuds);
 
