@@ -10,11 +10,11 @@ The API endpoints are written to build an administrative dashboard for teachers 
 
 ### Installation and Configuration
 
-Persistence: mongodb
+Persistence: mongodb,
 url: mongodb://localhost:27017/dashboard
 
-DB Name: dashboard
-Collection: school
+DB Name: dashboard,
+Collection: school,
 Index: 
 {
     "teacher" : 1.0
