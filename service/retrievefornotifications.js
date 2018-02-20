@@ -13,6 +13,8 @@ var url = "mongodb://localhost:27017/dashboard";
 
 router.post('/', function(req, res) {
 
+    var notifyEmails = "";
+
     if (null == req.body.teacher
         || undefined == req.body.teacher) {
         res.status(200)
@@ -21,6 +23,7 @@ router.post('/', function(req, res) {
                 message: "Teacher Email required"
             });
     }
+
 
     mongoClient.connect(url, function (err, db) {
         db.collection("school").find({
@@ -33,6 +36,18 @@ router.post('/', function(req, res) {
                     for (var idx = 0; idx < result[0].students.length; idx++) {
                         if(!result[0].students[idx].suspend) {
                             studs.push(result[0].students[idx].email);
+                        }
+                    }
+
+                    if(null!= req.body.notification &&
+                        undefined != req.body.notification){
+                        var mail = req.body.notification.
+                                            match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+
+                        if(null!=mail) {
+                            for (var idx = 0; idx < mail.length; idx++) {
+                                studs.push(mail[idx]);
+                            }
                         }
                     }
 
