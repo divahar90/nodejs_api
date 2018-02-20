@@ -10,16 +10,22 @@ The API endpoints are written to build an administrative dashboard for teachers 
 
 ### Installation and Configuration
 
-Persistence: mongodb,
-url: mongodb://localhost:27017/dashboard
+* Persistence: mongodb (Since Node.js and Mongo DB goes hand in hand)
+* url: mongodb://localhost:27017/dashboard (For local machine)
+* url: mongodb://mongo/dashboard (For docker)
 
-DB Name: dashboard,
-Collection: school,
-Index: 
-{
-    "teacher" : 1.0
-}
+### Steps to run the app using docker compose:
+1. Clone the repository into a folder
+2. Open the path and run docker-compose up --build
+3. Open one more docker terminal and execute these DB commands:
+	
+	docker exec -it nodejsapi_mongo_1 bash (nodejsapi_mongo_1 is the mongo container created for me. Please check docker logs to get your mongo container name)
+	Type mongo
+	Type use dashboard
+	Type db.createCollection("school")
+	Type db.school.ensureIndex( { teacher: 1 }, { unique: true } )
 
+### Screen prints (Tested in my Docker locally)
 ### 1. As a teacher, I should be able to register one or more students.
 
 Success flow
@@ -57,4 +63,10 @@ When insufficient number of teachers are specified
 
 ### 5. As a teacher, I should be able to retrieve all student emails that can receive notifications from a teacher's email.
 
+Student ID associated with a teacher (When not suspended)
+
 ![alt text](/misc/not1.jpg "Title")
+
+Student IDs associated with a teacher and also mentioned in notification (Duplicates avoided in response)
+
+![alt text](/misc/not2.jpg "Title")

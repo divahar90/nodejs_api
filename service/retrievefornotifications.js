@@ -9,11 +9,9 @@ var express = require('express');
 var router = express.Router();
 
 var mongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/dashboard";
+var url = "mongodb://mongo/dashboard";
 
 router.post('/', function(req, res) {
-
-    var notifyEmails = "";
 
     if (null == req.body.teacher
         || undefined == req.body.teacher) {
@@ -24,27 +22,27 @@ router.post('/', function(req, res) {
             });
     }
 
-
-    mongoClient.connect(url, function (err, db) {
-        db.collection("school").find({
-            $and: [{"teacher": req.body.teacher}, {"students.suspend": {$all: [false]}}]}).toArray(function (err, result) {
+    else {
+        mongoClient.connect(url, function (err, db) {
+            db.collection("school").find({
+                $and: [{"teacher": req.body.teacher}, {"students.suspend": {$all: [false]}}]
+            }).toArray(function (err, result) {
                 var studs = [];
                 var uniqueStuds = [];
 
-                if(null!=result
-                            && undefined!=result && result.length>0) {
+                if (null != result
+                    && undefined != result && result.length > 0) {
                     for (var idx = 0; idx < result[0].students.length; idx++) {
-                        if(!result[0].students[idx].suspend) {
+                        if (!result[0].students[idx].suspend) {
                             studs.push(result[0].students[idx].email);
                         }
                     }
 
-                    if(null!= req.body.notification &&
-                        undefined != req.body.notification){
-                        var mail = req.body.notification.
-                                            match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+                    if (null != req.body.notification &&
+                        undefined != req.body.notification) {
+                        var mail = req.body.notification.match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
 
-                        if(null!=mail) {
+                        if (null != mail) {
                             for (var idx = 0; idx < mail.length; idx++) {
                                 studs.push(mail[idx]);
                             }
@@ -56,8 +54,6 @@ router.post('/', function(req, res) {
                     })
                 }
 
-            console.log(uniqueStuds);
-
                 res.status(200)
                     .json({
                         success: true,
@@ -66,7 +62,8 @@ router.post('/', function(req, res) {
 
                 db.close();
             })
-    });
+        });
+    }
 });
 
 module.exports.router = router;
