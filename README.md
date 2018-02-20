@@ -19,11 +19,13 @@ The API endpoints are written to build an administrative dashboard for teachers 
 2. Open the path and run docker-compose up --build
 3. Open one more docker terminal and execute these DB commands:
 	
-	docker exec -it nodejsapi_mongo_1 bash (nodejsapi_mongo_1 is the mongo container created for me. Please check docker logs to get your mongo container name)
-	Type mongo
-	Type use dashboard
-	Type db.createCollection("school")
-	Type db.school.ensureIndex( { teacher: 1 }, { unique: true } )
+	* docker exec -it nodejsapi_mongo_1 bash (nodejsapi_mongo_1 is the mongo container created for me. Please check docker logs to get your mongo container name)
+	* Type mongo
+	* Type use dashboard
+	* Type db.createCollection("school")
+	* Type db.school.ensureIndex( { teacher: 1 }, { unique: true } )
+	
+### Tests for each service end point are in test folder (Using mocha and Chai)
 
 ### Screen prints (Tested in my Docker locally)
 ### 1. As a teacher, I should be able to register one or more students.
