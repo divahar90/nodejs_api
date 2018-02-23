@@ -37,6 +37,7 @@ router.post('/', function(req, res) {
                             studs.push(result[0].students[idx].email);
                         }
                     }
+                }
 
                     if (null != req.body.notification &&
                         undefined != req.body.notification) {
@@ -52,7 +53,7 @@ router.post('/', function(req, res) {
                     uniqueStuds = studs.filter(function (elem, pos) {
                         return studs.indexOf(elem) == pos;
                     })
-                }
+
 
                 res.status(200)
                     .json({

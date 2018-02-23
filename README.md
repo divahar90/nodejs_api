@@ -61,6 +61,12 @@ When insufficient number of teachers are specified
 
 ### 4. When a student is suspended, he will not be able to receive any teacher's notifications anymore.
 
+```
+I have handled this use case by introducing a flag for each student email while registering. By default, the suspend flag for each student id will be false.
+
+Once a student Id is suspended, this flag is set to true, thereby making the students not to receive notifications.
+```
+
 ![alt text](/misc/sus1.jpg "Title")
 
 ### 5. As a teacher, I should be able to retrieve all student emails that can receive notifications from a teacher's email.
